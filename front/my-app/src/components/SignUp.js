@@ -1,4 +1,8 @@
 import React from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
+import { SnackbarContent } from "@material-ui/core";
+import "./SignUp.css";
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -40,7 +44,6 @@ class SignUp extends React.Component {
   }
 
   handleSubmit = e => {
-    // console.log(`A form was submitted ${JSON.stringify(this.state)}`);
     e.preventDefault();
     fetch("/auth/signup", {
       method: "POST",
@@ -50,52 +53,98 @@ class SignUp extends React.Component {
       body: JSON.stringify(this.state)
     })
       .then(res => res.json())
-      .then(
-        res => this.setState({ flash: res.flash }),
-        err => this.setState({ flash: err.flash })
-      );
+      .then(res => this.setState({ flash: res.flash }))
+      .catch(err => this.setState({ flash: err.flash }));
+    this.setState({ open: false });
+    console.log("form submitted");
   };
 
   render() {
     return (
-      <>
-        <h1>{JSON.stringify(this.state)}</h1>
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            value={this.state.email}
-            onChange={this.updateEmailField}
-          />
-          <input
-            type="password"
-            name="password"
-            value={this.state.password}
-            onChange={this.updatePasswordField}
-          />
-          <input
-            type="password"
-            name="passwordconf"
-            value={this.state.passwordconf}
-            onChange={this.updatePasswordConfField}
-          />
-          <input
-            type="firstname"
-            name="firstname"
-            value={this.state.firstname}
-            onChange={this.updateFirstNameField}
-          />
-          <input
-            type="lastname"
-            name="lastname"
-            value={this.state.lastname}
-            onChange={this.updateLastNameField}
-          />
+      <div className="SignUp">
+        <div className="container">
+          <h2>Sign up !</h2>
+          <form onSubmit={this.handleSubmit} className="form">
+            <div>
+              <TextField
+                label="Email"
+                id="email"
+                type="email"
+                name="email"
+                fullWidth
+                value={this.state.email}
+                onChange={this.updateEmailField}
+              />
+            </div>
 
-          <input type="submit" value="Submit" />
-        </form>
-        {this.state.flash && <p>{this.state.flash}</p>}
-      </>
+            <div>
+              <TextField
+                label="Password"
+                id="password"
+                type="password"
+                name="password"
+                fullWidth
+                value={this.state.password}
+                onChange={this.updatePasswordField}
+              />
+            </div>
+
+            <div>
+              <TextField
+                label="Confirm Password"
+                id="passwordConf"
+                type="password"
+                name="passwordConf"
+                fullWidth
+                value={this.state.passwordConf}
+                onChange={this.updatePasswordConfField}
+              />
+            </div>
+
+            <div>
+              <TextField
+                label="First Name"
+                id="name"
+                type="text"
+                name="name"
+                fullWidth
+                value={this.state.name}
+                onChange={this.updateFirstNameField}
+              />
+            </div>
+
+            <div>
+              <TextField
+                label="Last Name"
+                id="lastName"
+                type="text"
+                name="lastName"
+                fullWidth
+                value={this.state.lastName}
+                onChange={this.updateLastNameField}
+              />
+            </div>
+            <div className="submit-button">
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.handleSubmit}
+              >
+                Submit
+              </Button>
+            </div>
+          </form>
+        </div>
+
+        <div className="snackbar">
+          {this.state.flash && (
+            <SnackbarContent
+              anchorOrigin={"bottom, center"}
+              message={this.state.flash}
+            />
+          )}
+        </div>
+      </div>
     );
   }
 }

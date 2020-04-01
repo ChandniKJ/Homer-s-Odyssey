@@ -1,0 +1,23 @@
+.SignUp .container {
+  margin: 20px;
+}
+
+.SignUp .container h2 {
+  display: flex;
+}
+
+.container .form .submit-button {
+  margin-top: 40px;
+  margin-right: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.SignUp .snackbar {
+  position: fixed;
+  width: 500px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

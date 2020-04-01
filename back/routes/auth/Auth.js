@@ -19,12 +19,9 @@ router.post("/signup", function(req, res, next) {
     fields
   ) {
     if (error) {
-      console.log(error);
-      res.status(500).end();
-      // res.status(500).send("Error in in login");
+      res.status(500).json({ flash: error.message });
     } else {
-      res.status(200).json(user);
-      res.end();
+      res.status(200).json({ flash: "User has been signed up!" });
     }
   });
 });
