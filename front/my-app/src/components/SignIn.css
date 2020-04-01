@@ -1,28 +1,28 @@
-.SignUp .container {
+.SignIn .container {
   margin: 20px;
 }
 
-.SignUp .container h2 {
+.SignIn .container h2 {
   display: flex;
 }
 
-.container .form .signup-button {
+.container .form .signin-button {
   margin-top: 40px;
   margin-right: 15px;
   display: flex;
   justify-content: flex-end;
 }
 
-.SignUp .snackbar {
+.signin-button a {
+  text-decoration: none;
+  color: white;
+}
+
+.SignIn .snackbar {
   position: fixed;
   width: 500px;
   margin: 0 auto;
   left: 0;
   right: 0;
   bottom: 0;
-}
-
-.signup-button a {
-  text-decoration: none;
-  color: white;
 }

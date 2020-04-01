@@ -3,25 +3,17 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import { Link, Redirect } from "react-router-dom";
-import { SnackbarContent } from "@material-ui/core";
-import "./SignUp.css";
+import "./SignIn.css";
 
-class SignUp extends React.Component {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       email: "",
-      password: "",
-      passwordconf: "",
-      firstname: "",
-      lastname: "",
-      flash: ""
+      password: ""
     };
     this.updateEmailField = this.updateEmailField.bind(this);
     this.updatePasswordField = this.updatePasswordField.bind(this);
-    this.updatePasswordConfField = this.updatePasswordConfField.bind(this);
-    this.updateFirstNameField = this.updateFirstNameField.bind(this);
-    this.updateLastNameField = this.updateLastNameField.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -32,32 +24,19 @@ class SignUp extends React.Component {
   updatePasswordField(event) {
     this.setState({ password: event.target.value });
   }
-
-  updatePasswordConfField(event) {
-    this.setState({ passwordconf: event.target.value });
-  }
-
-  updateFirstNameField(event) {
-    this.setState({ firstname: event.target.value });
-  }
-
-  updateLastNameField(event) {
-    this.setState({ lastname: event.target.value });
-  }
-
   setRedirect = () => {
     this.setState({ redirect: true });
   };
 
   renderRedirect = () => {
-    if (this.state.redirect) {
-      return <Redirect to="/" />;
+    if (this.state.redirect === true) {
+      return <Redirect to="/profile" />;
     }
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    fetch("/auth/signup", {
+    fetch("/auth/signin", {
       method: "POST",
       headers: new Headers({
         "Content-Type": "application/json"
@@ -75,7 +54,7 @@ class SignUp extends React.Component {
     return (
       <div className="SignUp">
         <div className="container">
-          <h2>Sign up !</h2>
+          <h2>Sign in !</h2>
           <form onSubmit={this.handleSubmit} className="form">
             <div>
               <TextField
@@ -101,42 +80,7 @@ class SignUp extends React.Component {
               />
             </div>
 
-            <div>
-              <TextField
-                label="Confirm Password"
-                id="passwordConf"
-                type="password"
-                name="passwordConf"
-                fullWidth
-                value={this.state.passwordConf}
-                onChange={this.updatePasswordConfField}
-              />
-            </div>
-
-            <div>
-              <TextField
-                label="First Name"
-                id="name"
-                type="text"
-                name="name"
-                fullWidth
-                value={this.state.name}
-                onChange={this.updateFirstNameField}
-              />
-            </div>
-
-            <div>
-              <TextField
-                label="Last Name"
-                id="lastName"
-                type="text"
-                name="lastName"
-                fullWidth
-                value={this.state.lastName}
-                onChange={this.updateLastNameField}
-              />
-            </div>
-            <div className="signup-button">
+            <div className="signin-button">
               <ButtonGroup
                 size="small"
                 aria-label="small outlined button group"
@@ -147,27 +91,18 @@ class SignUp extends React.Component {
                   color="primary"
                   onClick={this.setRedirect}
                 >
-                  Submit
+                  Login
                 </Button>
                 <Button variant="contained" color="primary">
-                  <Link to="/signin">Sign In</Link>
+                  <Link to="/signup">Sign Up</Link>
                 </Button>
               </ButtonGroup>
             </div>
           </form>
-        </div>
-
-        <div className="snackbar">
-          {this.state.flash && (
-            <SnackbarContent
-              anchorOrigin={"bottom, center"}
-              message={this.state.flash}
-            />
-          )}
         </div>
       </div>
     );
   }
 }
 
-export default SignUp;
+export default SignIn;
