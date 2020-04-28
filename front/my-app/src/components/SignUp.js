@@ -13,14 +13,14 @@ class SignUp extends React.Component {
       email: "",
       password: "",
       passwordconf: "",
-      firstname: "",
+      name: "",
       lastname: "",
-      flash: ""
+      flash: "",
     };
     this.updateEmailField = this.updateEmailField.bind(this);
     this.updatePasswordField = this.updatePasswordField.bind(this);
     this.updatePasswordConfField = this.updatePasswordConfField.bind(this);
-    this.updateFirstNameField = this.updateFirstNameField.bind(this);
+    this.updateNameField = this.updateNameField.bind(this);
     this.updateLastNameField = this.updateLastNameField.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -37,8 +37,8 @@ class SignUp extends React.Component {
     this.setState({ passwordconf: event.target.value });
   }
 
-  updateFirstNameField(event) {
-    this.setState({ firstname: event.target.value });
+  updateNameField(event) {
+    this.setState({ name: event.target.value });
   }
 
   updateLastNameField(event) {
@@ -55,18 +55,18 @@ class SignUp extends React.Component {
     }
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     fetch("/auth/signup", {
       method: "POST",
       headers: new Headers({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       }),
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(this.state),
     })
-      .then(res => res.json())
-      .then(res => this.setState({ flash: res.flash }))
-      .catch(err => this.setState({ flash: err.flash }));
+      .then((res) => res.json())
+      .then((res) => this.setState({ flash: res.flash }))
+      .catch((err) => this.setState({ flash: err.flash }));
     this.setState({ open: false });
     console.log("form submitted");
   };
@@ -115,13 +115,13 @@ class SignUp extends React.Component {
 
             <div>
               <TextField
-                label="First Name"
+                label="Name"
                 id="name"
                 type="text"
                 name="name"
                 fullWidth
                 value={this.state.name}
-                onChange={this.updateFirstNameField}
+                onChange={this.updateNameField}
               />
             </div>
 

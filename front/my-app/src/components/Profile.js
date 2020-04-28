@@ -12,26 +12,23 @@ class Profile extends React.Component {
     this.state = {
       profile: {
         email: "homer.simpson@wildcodeschool.fr",
-        firstname: "Homer",
-        lastname: "Simpson"
-      }
+        name: "Homer",
+        lastname: "Simpson",
+      },
     };
   }
 
   render() {
     return (
       <div className="profile">
-        <h1>Welcome {this.state.profile.firstname}</h1>
+        <h1>Welcome {this.state.profile.name}</h1>
         <List>
           <ListItem>
             <ListItemText
               primary="Email"
               secondary={this.state.profile.email}
             />
-            <ListItemText
-              primary="First Name"
-              secondary={this.state.profile.firstname}
-            />
+            <ListItemText primary="Name" secondary={this.state.profile.name} />
             <ListItemText
               primary="Last Name"
               secondary={this.state.profile.lastname}

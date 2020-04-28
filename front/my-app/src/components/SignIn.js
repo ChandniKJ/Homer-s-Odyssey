@@ -10,7 +10,7 @@ class SignIn extends React.Component {
     super(props);
     this.state = {
       email: "",
-      password: ""
+      password: "",
     };
     this.updateEmailField = this.updateEmailField.bind(this);
     this.updatePasswordField = this.updatePasswordField.bind(this);
@@ -34,18 +34,18 @@ class SignIn extends React.Component {
     }
   };
 
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     fetch("/auth/signin", {
       method: "POST",
       headers: new Headers({
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       }),
-      body: JSON.stringify(this.state)
+      body: JSON.stringify(this.state),
     })
-      .then(res => res.json())
-      .then(res => this.setState({ flash: res.flash }))
-      .catch(err => this.setState({ flash: err.flash }));
+      .then((res) => res.json())
+      .then((res) => this.setState({ flash: res.flash }))
+      .catch((err) => this.setState({ flash: err.flash }));
     this.setState({ open: false });
     console.log("form submitted");
   };
